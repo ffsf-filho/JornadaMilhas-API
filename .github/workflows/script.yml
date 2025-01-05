@@ -24,6 +24,11 @@ jobs:
       #dotnet publish ./src/JornadaMilhas.API
       - name: Publicando a API
         run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp ./src/JornadaMilhas.API
+      - name: Upload de artefato para deploy
+        uses: actions/download-artifact@v4
+        with:
+          name: .net-app
+          path: ${{env.DOTNET_ROOT}}/myapp
   deploy:
     runs-on: ubuntu-latest
     needs: build
